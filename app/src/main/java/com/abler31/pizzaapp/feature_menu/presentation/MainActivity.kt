@@ -1,4 +1,4 @@
-package com.abler31.pizzaapp
+package com.abler31.pizzaapp.feature_menu.presentation
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.abler31.pizzaapp.R
 import com.abler31.pizzaapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
