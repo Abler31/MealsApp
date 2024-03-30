@@ -13,4 +13,5 @@
     <color name="grey_bottom_background">#F0F0F0</color>
     <color name="grey_text_item">#AAAAAD</color>
     <color name="red_category_background">#33FD3A69</color>
+    <color name="main_background">#FBFBFB</color>
 </resources>
