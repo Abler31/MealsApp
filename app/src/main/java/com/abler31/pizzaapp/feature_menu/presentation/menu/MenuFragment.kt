@@ -1,15 +1,14 @@
-package com.abler31.pizzaapp.feature_menu.presentation.home
+package com.abler31.pizzaapp.feature_menu.presentation.menu
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.abler31.pizzaapp.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class MenuFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -22,8 +21,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val menuViewModel =
+            ViewModelProvider(this).get(MenuViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
