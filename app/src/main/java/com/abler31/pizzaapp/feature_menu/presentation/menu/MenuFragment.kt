@@ -51,7 +51,6 @@ class MenuFragment : Fragment() {
             when(it){
                 is Resource.Success -> {
                     categoriesAdapter.setData(it.data!!)
-                    //Log.d("test", "resource success в observe ${ it.data!!.mealEntities[0].strMeal }")
                 }
                 is Resource.Error -> {
                     Log.d("test", it.message.toString())
@@ -62,6 +61,11 @@ class MenuFragment : Fragment() {
             }
         }
 
+        categoriesAdapter.setItemSelectedListener {
+            Log.d("test", "${it.strCategory}")
+
+            vm.getMealsByCategory(it)
+        }
         //meals
         mealsAdapter = MealsRecyclerAdapter()
         mealsRecyclerView = view.findViewById(R.id.rv_meals)
@@ -75,6 +79,21 @@ class MenuFragment : Fragment() {
                     progressBar.visibility = View.GONE
                     mealsAdapter.setData(it.data!!)
                     Log.d("test", "resource success в observe ${ it.data!!.mealEntities[0].strMeal }")
+                }
+                is Resource.Error -> {
+                    Log.d("test", it.message.toString())
+                }
+                is Resource.Loading -> {
+                    progressBar.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        vm.mealsByCategory.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Success -> {
+                    progressBar.visibility = View.GONE
+                    mealsAdapter.setData(it.data!!)
                 }
                 is Resource.Error -> {
                     Log.d("test", it.message.toString())
