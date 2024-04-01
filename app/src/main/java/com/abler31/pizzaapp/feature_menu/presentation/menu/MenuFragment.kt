@@ -1,10 +1,12 @@
 package com.abler31.pizzaapp.feature_menu.presentation.menu
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -42,10 +44,12 @@ class MenuFragment : Fragment() {
         mealsRecyclerView = view.findViewById(R.id.rv_meals)
         mealsRecyclerView. layoutManager = LinearLayoutManager(requireContext())
         mealsRecyclerView.adapter = mealsAdapter
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
 
         vm.meals.observe(viewLifecycleOwner){
             when(it){
                 is Resource.Success -> {
+                    progressBar.visibility = View.GONE
                     mealsAdapter.setData(it.data!!)
                     Log.d("test", "resource success в observe ${ it.data!!.mealEntities[0].strMeal }")
                 }
@@ -53,7 +57,7 @@ class MenuFragment : Fragment() {
                     Log.d("test", it.message.toString())
                 }
                 is Resource.Loading -> {
-
+                    progressBar.visibility = View.VISIBLE
                 }
             }
         }
