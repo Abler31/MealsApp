@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.abler31.pizzaapp.feature_menu.data.model.meal.MealsModelEntity
 import com.abler31.pizzaapp.feature_menu.domain.Resource
 import com.abler31.pizzaapp.feature_menu.domain.model.category.Categories
+import com.abler31.pizzaapp.feature_menu.domain.model.category.Category
 import com.abler31.pizzaapp.feature_menu.domain.model.meal.Meals
 import com.abler31.pizzaapp.feature_menu.domain.usecase.MenuUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,18 +27,36 @@ class MenuViewModel @Inject constructor (
     private val _meals = MutableLiveData<Resource<MealsModelEntity>>()
     val meals: LiveData<Resource<MealsModelEntity>> = _meals
 
+    private val _mealsByCategory = MutableLiveData<Resource<MealsModelEntity>>()
+    val mealsByCategory: LiveData<Resource<MealsModelEntity>> = _mealsByCategory
+
     fun getCategories() = viewModelScope.launch(Dispatchers.IO) {
         _categories.postValue(Resource.Loading())
         _categories.postValue(menuUseCases.getCategories.invoke())
-        //Log.d("test", _categories.value!!.message.toString())
     }
 
     fun getMeals() = viewModelScope.launch(Dispatchers.IO) {
-
         _meals.postValue(Resource.Loading())
         _meals.postValue(menuUseCases.getMeals.invoke())
-
-
     }
 
+    fun getMealsByCategory(category: Category){
+        val meals = meals.value
+        when(meals){
+            is Resource.Success -> {
+                val mealsResult = MealsModelEntity(mealEntities = meals.data!!.mealEntities.filter {
+                    it.strCategory == category.strCategory})
+                _mealsByCategory.postValue(Resource.Success(data =  mealsResult))
+
+            }
+            is Resource.Error -> {
+
+            }
+            is Resource.Loading -> {
+
+            }
+
+            else -> {}
+        }
+    }
 }
