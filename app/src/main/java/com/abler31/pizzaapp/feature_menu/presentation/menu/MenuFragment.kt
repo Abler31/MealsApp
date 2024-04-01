@@ -1,19 +1,27 @@
 package com.abler31.pizzaapp.feature_menu.presentation.menu
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.abler31.pizzaapp.R
 import com.abler31.pizzaapp.databinding.FragmentHomeBinding
+import com.abler31.pizzaapp.feature_menu.domain.Resource
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MenuFragment : Fragment() {
 
+    val vm by viewModels<MenuViewModel>()
+    private lateinit var mealsAdapter: MealsRecyclerAdapter
+    lateinit var mealsRecyclerView: RecyclerView
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,14 +29,37 @@ class MenuFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val menuViewModel =
-            ViewModelProvider(this).get(MenuViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mealsAdapter = MealsRecyclerAdapter()
+        mealsRecyclerView = view.findViewById(R.id.rv_meals)
+        mealsRecyclerView. layoutManager = LinearLayoutManager(requireContext())
+        mealsRecyclerView.adapter = mealsAdapter
+
+        vm.meals.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Success -> {
+                    mealsAdapter.setData(it.data!!)
+                    Log.d("test", "resource success в observe ${ it.data!!.mealEntities[0].strMeal }")
+                }
+                is Resource.Error -> {
+                    Log.d("test", it.message.toString())
+                }
+                is Resource.Loading -> {
+
+                }
+            }
+        }
+        vm.getMeals()
+        vm.getCategories()
+
     }
 
     override fun onDestroyView() {

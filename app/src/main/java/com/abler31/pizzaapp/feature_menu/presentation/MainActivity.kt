@@ -10,7 +10,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.abler31.pizzaapp.R
 import com.abler31.pizzaapp.databinding.ActivityMainBinding
 import com.google.android.material.appbar.MaterialToolbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
