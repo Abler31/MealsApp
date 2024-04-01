@@ -15,5 +15,6 @@
     <color name="red_category_background">#33FD3A69</color>
     <color name="main_background">#FBFBFB</color>
     <color name="bottom_menu_icon">#7B7B7B</color>
+    <color name="separator">#F3F5F9</color>
 </resources>
 
