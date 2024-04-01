@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -56,6 +57,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
@@ -75,19 +77,20 @@
                     <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="16dp"
                         android:scrollbars="none">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:padding="16dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:paddingTop="16dp"
+                            android:paddingBottom="8dp">
 
                             <!-- Здесь добавьте ваши баннеры -->
                             <ImageView
                                 android:layout_width="300dp"
                                 android:layout_height="112dp"
+                                android:layout_marginStart="16dp"
                                 android:scaleType="center"
                                 android:src="@drawable/banner1" />
 
@@ -107,49 +110,25 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="64dp"
                     android:layout_gravity="bottom"
+                    android:background="@color/white"
                     app:layout_collapseMode="pin">
 
-                    <LinearLayout
-                        android:id="@+id/category_bar"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_categories"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
+                        android:layout_gravity="center"
                         android:orientation="horizontal"
-                        android:background="@color/white"
-                        app:layout_collapseMode="pin">
-
-                        <!-- Кнопки категорий -->
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Пицца" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Комбо" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Десерты" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Напитки" />
-
-                    </LinearLayout>
+                        app:layout_collapseMode="pin"
+                        tools:listitem="@layout/recycler_item_category" />
 
                 </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
-
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_meals"

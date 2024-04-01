@@ -33,11 +33,7 @@ class MenuViewModel @Inject constructor (
     }
 
     fun getMeals() = viewModelScope.launch(Dispatchers.IO) {
-
         _meals.postValue(Resource.Loading())
         _meals.postValue(menuUseCases.getMeals.invoke())
-
-
     }
-
 }

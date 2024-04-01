@@ -23,6 +23,8 @@ class MenuFragment : Fragment() {
     val vm by viewModels<MenuViewModel>()
     private lateinit var mealsAdapter: MealsRecyclerAdapter
     lateinit var mealsRecyclerView: RecyclerView
+    private lateinit var categoriesAdapter: CategoriesRecyclerAdapter
+    lateinit var categoriesRecyclerView: RecyclerView
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -40,9 +42,30 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //categories
+        categoriesAdapter = CategoriesRecyclerAdapter()
+        categoriesRecyclerView = view.findViewById(R.id.rv_categories)
+        categoriesRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        categoriesRecyclerView.adapter = categoriesAdapter
+        vm.categories.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Success -> {
+                    categoriesAdapter.setData(it.data!!)
+                    //Log.d("test", "resource success в observe ${ it.data!!.mealEntities[0].strMeal }")
+                }
+                is Resource.Error -> {
+                    Log.d("test", it.message.toString())
+                }
+                is Resource.Loading -> {
+
+                }
+            }
+        }
+
+        //meals
         mealsAdapter = MealsRecyclerAdapter()
         mealsRecyclerView = view.findViewById(R.id.rv_meals)
-        mealsRecyclerView. layoutManager = LinearLayoutManager(requireContext())
+        mealsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         mealsRecyclerView.adapter = mealsAdapter
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
 
