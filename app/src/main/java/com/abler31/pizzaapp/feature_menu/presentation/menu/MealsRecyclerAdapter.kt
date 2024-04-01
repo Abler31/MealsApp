@@ -3,23 +3,27 @@ package com.abler31.pizzaapp.feature_menu.presentation.menu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.abler31.pizzaapp.R
+import com.abler31.pizzaapp.feature_menu.data.model.meal.MealEntity
 import com.abler31.pizzaapp.feature_menu.data.model.meal.MealsModelEntity
 import com.abler31.pizzaapp.feature_menu.domain.model.meal.Meal
 import com.abler31.pizzaapp.feature_menu.domain.model.meal.Meals
+import com.bumptech.glide.Glide
 
 class MealsRecyclerAdapter : RecyclerView.Adapter<MealsRecyclerAdapter.ItemsViewHolder>() {
-    private var mealsList = emptyList<Meal>()
+    private var mealsList = emptyList<MealEntity>()
 
     inner class ItemsViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
         val mealName = itemView.findViewById<TextView>(R.id.tv_strMeal_item)
         val ingredients = itemView.findViewById<TextView>(R.id.tv_ingredients)
+        val img = itemView.findViewById<ImageView>(R.id.img_meal_item)
 
-        fun bind(meal: Meal) {
+        fun bind(meal: MealEntity) {
             mealName.text = meal.strMeal
             val ingredientsList = mutableListOf<String>()
             ingredientsList.add(meal.strIngredient1)
@@ -42,9 +46,16 @@ class MealsRecyclerAdapter : RecyclerView.Adapter<MealsRecyclerAdapter.ItemsView
             ingredientsList.add(meal.strIngredient18)
             ingredientsList.add(meal.strIngredient19)
             ingredientsList.add(meal.strIngredient20)
-            val nonEmptyStrings = ingredientsList.filter { it.isNotEmpty() }
+            val nonEmptyStrings = ingredientsList.filter { it?.isNotEmpty() ?: false }
             val ingredientsStr = nonEmptyStrings.joinToString(", ")
             ingredients.text = ingredientsStr
+
+            Glide.with(itemView.context)
+                .load(meal.strMealThumb)
+                .placeholder(R.drawable.menu_icon)
+                .error(R.drawable.profile_icon)
+                .into(img)
+
         }
     }
 
@@ -63,8 +74,8 @@ class MealsRecyclerAdapter : RecyclerView.Adapter<MealsRecyclerAdapter.ItemsView
         holder.bind(mealsList[position])
     }
 
-    fun setData(data: Meals) {
-        val newList = mutableListOf<Meal>()
+    fun setData(data: MealsModelEntity) {
+        val newList = mutableListOf<MealEntity>()
         data.mealEntities.forEach {
             newList.add(it)
         }
@@ -72,3 +83,4 @@ class MealsRecyclerAdapter : RecyclerView.Adapter<MealsRecyclerAdapter.ItemsView
         notifyDataSetChanged()
     }
 }
+

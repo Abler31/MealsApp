@@ -9,6 +9,6 @@ interface MenuRepository {
 
     suspend fun getCategories(): Resource<Categories>
 
-    suspend fun getMeals(): Resource<Meals>
+    suspend fun getMeals(): Resource<MealsModelEntity>
 
 }

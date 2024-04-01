@@ -9,7 +9,7 @@ class GetMeals(
     private val repository: MenuRepository
 ) {
 
-    suspend operator fun invoke(): Resource<Meals>{
+    suspend operator fun invoke(): Resource<MealsModelEntity>{
         //Log.d("test", repository.getMeals().data?.mealEntities?.get(1)?.strMeal ?: "пришел null GetMeals")
         return repository.getMeals()
     }

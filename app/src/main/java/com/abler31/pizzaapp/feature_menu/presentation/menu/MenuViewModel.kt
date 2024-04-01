@@ -23,8 +23,8 @@ class MenuViewModel @Inject constructor (
     private val _categories = MutableLiveData<Resource<Categories>>()
     val categories: LiveData<Resource<Categories>> = _categories
 
-    private val _meals = MutableLiveData<Resource<Meals>>()
-    val meals: LiveData<Resource<Meals>> = _meals
+    private val _meals = MutableLiveData<Resource<MealsModelEntity>>()
+    val meals: LiveData<Resource<MealsModelEntity>> = _meals
 
     fun getCategories() = viewModelScope.launch(Dispatchers.IO) {
         _categories.postValue(Resource.Loading())

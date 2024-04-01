@@ -43,18 +43,16 @@ class MenuRepositoryImpl(private val networkApi: NetworkApi): MenuRepository {
         }
     }
 
-    override suspend fun getMeals(): Resource<Meals> {
+    override suspend fun getMeals(): Resource<MealsModelEntity> {
         return withContext(Dispatchers.IO) {
             try {
                 val response: Response<MealsModelEntity> = networkApi.getMeals()
                 if (response.isSuccessful) {
                     Log.d("test", "response в getMeals ${response.body()!!.mealEntities[0].strMeal}")
                     Log.d("test", "блюда загрузились")
-                    val data = MealsModelToDomainMapper(MealEntityToDomainMapper())
-                            .transform(response.body()!!)
 
                     Log.d("test", "после маппера")
-                    Resource.Success(data = data)
+                    Resource.Success(data = response.body()!!)
                 } else {
                     Log.d("test", "блюда не загрузились")
                     Resource.Error(errorMessage = response.errorBody().toString())
