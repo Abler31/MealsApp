@@ -1,5 +1,7 @@
 package com.abler31.pizzaapp.di
 
+import com.abler31.pizzaapp.feature_menu.data.database.CategoryDao
+import com.abler31.pizzaapp.feature_menu.data.database.MealDao
 import com.abler31.pizzaapp.feature_menu.data.network.NetworkApi
 import com.abler31.pizzaapp.feature_menu.data.repository.MenuRepositoryImpl
 import com.abler31.pizzaapp.feature_menu.domain.repository.MenuRepository
@@ -31,8 +33,8 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideRepository(networkApi: NetworkApi): MenuRepository{
-        return MenuRepositoryImpl(networkApi)
+    fun provideRepository(networkApi: NetworkApi, categoryDao: CategoryDao, mealDao: MealDao): MenuRepository{
+        return MenuRepositoryImpl(networkApi, mealDao, categoryDao)
     }
 
 }
