@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Москва"
+                android:text="@string/city_name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -86,7 +86,6 @@
                             android:paddingTop="16dp"
                             android:paddingBottom="8dp">
 
-                            <!-- Здесь добавьте ваши баннеры -->
                             <ImageView
                                 android:layout_width="300dp"
                                 android:layout_height="112dp"
@@ -100,8 +99,6 @@
                                 android:layout_marginStart="16dp"
                                 android:scaleType="center"
                                 android:src="@drawable/banner2" />
-
-                            <!-- Добавьте другие баннеры по аналогии -->
 
                         </LinearLayout>
                     </HorizontalScrollView>

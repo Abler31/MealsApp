@@ -40,37 +40,39 @@ class MenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle = Bundle()
-        val dataStoredPreferences = context?.getSharedPreferences("dataStored", Context.MODE_PRIVATE)
+        val dataStoredPreferences =
+            context?.getSharedPreferences("dataStored", Context.MODE_PRIVATE)
 
 
         //categories
         categoriesAdapter = CategoriesRecyclerAdapter()
         categoriesRecyclerView = view.findViewById(R.id.rv_categories)
-        categoriesRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        categoriesRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         categoriesRecyclerView.adapter = categoriesAdapter
         val isCategoryDataStored =
             dataStoredPreferences?.getBoolean("isCategoryDataStored", false)
-        vm.categories.observe(viewLifecycleOwner){
-            when(it){
+        vm.categories.observe(viewLifecycleOwner) {
+            when (it) {
                 is Resource.Success -> {
                     categoriesAdapter.setData(it.data!!)
-                    if (!isCategoryDataStored!!){
-                        it.data.categories.forEach {category ->
+                    if (!isCategoryDataStored!!) {
+                        it.data.categories.forEach { category ->
                             vm.insertCategoryData(category)
                         }
-                        with (dataStoredPreferences.edit()) {
+                        with(dataStoredPreferences.edit()) {
                             putBoolean("isCategoryDataStored", true)
                             apply()
                         }
                     }
                 }
+
                 is Resource.Error -> {
-                    if (isCategoryDataStored == true){
+                    if (isCategoryDataStored == true) {
                         vm.getCategoryData()
                     }
-                    Log.d("test", it.message.toString())
                 }
+
                 is Resource.Loading -> {
 
                 }
@@ -78,8 +80,6 @@ class MenuFragment : Fragment() {
         }
 
         categoriesAdapter.setItemSelectedListener {
-            Log.d("test", "${it.strCategory}")
-
             vm.getMealsByCategory(it)
         }
         //meals
@@ -90,47 +90,49 @@ class MenuFragment : Fragment() {
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
 
         val isMealsDataStored =
-            dataStoredPreferences?.getBoolean("isMealDataStored", false) //first time meals data stored flag
-        Log.d("test", "$isMealsDataStored")
-        vm.meals.observe(viewLifecycleOwner){
-            when(it){
+            dataStoredPreferences?.getBoolean(
+                "isMealDataStored",
+                false
+            ) //first time meals data stored flag
+        vm.meals.observe(viewLifecycleOwner) {
+            when (it) {
                 is Resource.Success -> {
-                    Log.d("test", "отработал meal observe")
                     progressBar.visibility = View.GONE
                     mealsAdapter.setData(it.data!!)
-                    if (!isMealsDataStored!!){
-                        it.data.mealEntities.forEach {mealEntity ->
+                    if (!isMealsDataStored!!) {
+                        it.data.mealEntities.forEach { mealEntity ->
                             vm.insertMealData(mealEntity)
                         }
-                        with (dataStoredPreferences.edit()) {
+                        with(dataStoredPreferences.edit()) {
                             putBoolean("isMealDataStored", true)
                             apply()
                         }
                     }
-
-                    Log.d("test", "resource success в observe ${ it.data!!.mealEntities[0].strMeal }")
                 }
+
                 is Resource.Error -> {
-                    if (isMealsDataStored == true){
+                    if (isMealsDataStored == true) {
                         vm.getMealsData()
                     }
-                    Log.d("test", it.message.toString())
                 }
+
                 is Resource.Loading -> {
                     progressBar.visibility = View.VISIBLE
                 }
             }
         }
 
-        vm.mealsByCategory.observe(viewLifecycleOwner){
-            when(it){
+        vm.mealsByCategory.observe(viewLifecycleOwner) {
+            when (it) {
                 is Resource.Success -> {
                     progressBar.visibility = View.GONE
                     mealsAdapter.setData(it.data!!)
                 }
+
                 is Resource.Error -> {
-                    Log.d("test", it.message.toString())
+
                 }
+
                 is Resource.Loading -> {
                     progressBar.visibility = View.VISIBLE
                 }

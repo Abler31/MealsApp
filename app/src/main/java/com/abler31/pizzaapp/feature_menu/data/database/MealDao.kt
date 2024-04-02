@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.abler31.pizzaapp.feature_menu.data.model.database.meal.MealData
-import com.abler31.pizzaapp.feature_menu.data.model.database.meal.MealsData
 import kotlinx.coroutines.flow.Flow
 
 @Dao

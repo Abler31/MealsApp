@@ -2,11 +2,9 @@ package com.abler31.pizzaapp.feature_menu.domain.repository
 
 import com.abler31.pizzaapp.feature_menu.data.model.database.category.CategoryData
 import com.abler31.pizzaapp.feature_menu.data.model.database.meal.MealData
-import com.abler31.pizzaapp.feature_menu.data.model.database.meal.MealsData
 import com.abler31.pizzaapp.feature_menu.data.model.network.meal.MealsModelEntity
 import com.abler31.pizzaapp.feature_menu.domain.Resource
 import com.abler31.pizzaapp.feature_menu.domain.model.category.Categories
-import com.abler31.pizzaapp.feature_menu.domain.model.meal.Meals
 import kotlinx.coroutines.flow.Flow
 
 interface MenuRepository {

@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataModule {
+object NetworkModule {
 
     @Provides
     fun providesBaseUrl(): String = "https://themealdb.com/"
