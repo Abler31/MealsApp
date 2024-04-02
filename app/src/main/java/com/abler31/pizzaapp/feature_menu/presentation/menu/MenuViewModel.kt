@@ -94,7 +94,7 @@ class MenuViewModel @Inject constructor(
                             strIngredient8 = it.strIngredient8,
                             strIngredient9 = it.strIngredient9,
                             strMeal = it.strMeal,
-                            strMealThumb = it.strMealThumb
+                            strMealThumb = ""
                         )
                     }
                     val mealsResult = MealsModelEntity(mealEntities = mealEntities)
@@ -107,7 +107,7 @@ class MenuViewModel @Inject constructor(
     fun getCategoryData() {
         viewModelScope.launch(Dispatchers.IO) {
             menuUseCases.getCategoryData.invoke().collect { categoriesData ->
-                if (!categoriesData.isEmpty()) {
+                if (categoriesData.isNotEmpty()) {
                     val categories = categoriesData.map {
                         Category(
                             strCategory = it.strCategoryData
@@ -123,6 +123,7 @@ class MenuViewModel @Inject constructor(
     fun insertMealData(mealEntity: MealEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             val mealData = MealData(
+                id = mealEntity.idMeal,
                 strCategory = mealEntity.strCategory,
                 strIngredient1 = mealEntity.strIngredient1,
                 strIngredient10 = mealEntity.strIngredient10,
@@ -154,6 +155,7 @@ class MenuViewModel @Inject constructor(
     fun insertCategoryData(category: Category) {
         viewModelScope.launch(Dispatchers.IO) {
             val categoryData = CategoryData(
+                id = category.idCategory,
                 strCategoryData = category.strCategory
             )
             menuUseCases.insertCategoryData.invoke(categoryData)

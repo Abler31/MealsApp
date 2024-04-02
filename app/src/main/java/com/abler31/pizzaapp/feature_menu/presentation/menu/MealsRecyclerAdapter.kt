@@ -25,7 +25,7 @@ class MealsRecyclerAdapter : RecyclerView.Adapter<MealsRecyclerAdapter.ItemsView
 
         fun bind(meal: MealEntity) {
             mealName.text = meal.strMeal
-            val ingredientsList = mutableListOf<String>()
+            val ingredientsList = mutableListOf<String?>()
             ingredientsList.add(meal.strIngredient1)
             ingredientsList.add(meal.strIngredient2)
             ingredientsList.add(meal.strIngredient3)
