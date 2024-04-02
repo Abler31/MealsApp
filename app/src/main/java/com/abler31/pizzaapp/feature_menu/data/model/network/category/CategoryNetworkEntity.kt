@@ -1,6 +1,6 @@
-package com.abler31.pizzaapp.feature_menu.data.model.category
+package com.abler31.pizzaapp.feature_menu.data.model.network.category
 
-data class CategoryEntity(
+data class CategoryNetworkEntity(
     val idCategory: String,
     val strCategory: String,
     val strCategoryThumb: String,

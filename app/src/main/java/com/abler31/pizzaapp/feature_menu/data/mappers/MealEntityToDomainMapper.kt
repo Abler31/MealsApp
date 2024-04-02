@@ -1,7 +1,7 @@
 package com.abler31.pizzaapp.feature_menu.data.mappers
 
 import android.util.Log
-import com.abler31.pizzaapp.feature_menu.data.model.meal.MealEntity
+import com.abler31.pizzaapp.feature_menu.data.model.network.meal.MealEntity
 import com.abler31.pizzaapp.feature_menu.domain.model.meal.Meal
 
 class MealEntityToDomainMapper : Mapper<MealEntity, Meal> {

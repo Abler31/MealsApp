@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.abler31.pizzaapp.feature_menu.presentation.menu.MenuFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_menu"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_profile"
         android:name="com.abler31.pizzaapp.feature_menu.presentation.profile.ProfileFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_cart"
         android:name="com.abler31.pizzaapp.feature_menu.presentation.cart.CartFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_cart"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

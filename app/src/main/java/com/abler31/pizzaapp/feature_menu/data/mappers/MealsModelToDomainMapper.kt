@@ -1,8 +1,8 @@
 package com.abler31.pizzaapp.feature_menu.data.mappers
 
 import android.util.Log
-import com.abler31.pizzaapp.feature_menu.data.model.meal.MealEntity
-import com.abler31.pizzaapp.feature_menu.data.model.meal.MealsModelEntity
+import com.abler31.pizzaapp.feature_menu.data.model.network.meal.MealEntity
+import com.abler31.pizzaapp.feature_menu.data.model.network.meal.MealsModelEntity
 import com.abler31.pizzaapp.feature_menu.domain.model.meal.Meal
 import com.abler31.pizzaapp.feature_menu.domain.model.meal.Meals
 
