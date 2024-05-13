@@ -12,4 +12,4 @@ App displays meals information with filtering by category and offline mode.
 - MVVM
 - Clean Architecture
 
-<img src="https://github.com/Abler31/MealsApp/blob/master/mealsApp.gif" width="240"/>
+<img src="https://github.com/Abler31/MealsApp/blob/master/MealsAppGif.gif" width="240"/>
